@@ -26,8 +26,10 @@
                                                 <Strong><%= c["status"] %></Strong><br />
                                                 <%= c["prize"] %>&nbsp;for
                                                 <span id="ctl00_Body_Listviewpastchallenges_ctrl0_uc_challenge_categories1_spnCategories">
+													<% count = 0 %>	
 													<% for cat in c["categories"] %>
-														<span class="<%= cat["color"] %>"><%= cat["name"] %></span>,
+														<% count = count + 1 %>	
+														<span class="<%= cat["color"] %>"><%= cat["name"] %></span><% if count < c["categories"].count%>,<% end %>
 													<% end %>
                                                 </span>
                                                 </strong><br />

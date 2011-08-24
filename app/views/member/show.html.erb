@@ -18,15 +18,18 @@
                                 <div class="box-b">
                                     <div class="box-t">
                                         <div class="col-left fl">
-                                            <h4>
-                                                <a href="challenge_detail.html?contestID=255"><%= c["name"] %></a></h4>
-                                            <p><p><%= c["desc"][0..100] %>...</p>
+                                            <h4><a href="http://www.cloudspokes.com/challenge_detail.html?contestID=<%= c["sqlId"] %>"><%= c["name"] %></a></h4>
+                                            <p><p><%= c["desc"].gsub(%r{</?[^>]+?>}, '')[0..100] %>...</p>
                                         </div>
                                         <div class="col-right fr">
                                             <p id="ctl00_Body_Listviewpastchallenges_ctrl0_pwinstatus">
                                                 <Strong><%= c["status"] %></Strong><br />
-                                                $<%= c["prize"].to_i %>&nbsp;for
-                                                <span id="ctl00_Body_Listviewpastchallenges_ctrl0_uc_challenge_categories1_spnCategories"><span class="brown">Salesforce.com</span>, <span class="yellow">Heroku</span>, <span class="red">Ruby</span>, <span class="green">Cloud Foundry</span></span>
+                                                <%= c["prize"] %>&nbsp;for
+                                                <span id="ctl00_Body_Listviewpastchallenges_ctrl0_uc_challenge_categories1_spnCategories">
+													<% for cat in c["categories"] %>
+														<span class="<%= cat["color"] %>"><%= cat["name"] %></span>,
+													<% end %>
+                                                </span>
                                                 </strong><br />
                                                 
                                             </p>
@@ -50,17 +53,21 @@
                                 <div class="box-b">
                                     <div class="box-t">
                                         <div class="col-left fl">
-                                            <h4>
-                                                <a href="challenge_detail.html?contestID=255"><%= c["name"] %></a></h4>
-                                            <p><p><%= c["desc"][0..100] %>...</p>
+                                            <h4><a href="http://www.cloudspokes.com/challenge_detail.html?contestID=<%= c["sqlId"] %>"><%= c["name"] %></a></h4>
+                                            <p><p><%= c["desc"].gsub(%r{</?[^>]+?>}, '')[0..100] %>...</p>
                                         </div>
                                         <div class="col-right fr">
                                             <p id="ctl00_Body_Listviewpastchallenges_ctrl0_pwinstatus">
                                                 <Strong><%= c["status"] %></Strong><br />
                                                 $<%= c["prize"].to_i %>&nbsp;for
-                                                <span id="ctl00_Body_Listviewpastchallenges_ctrl0_uc_challenge_categories1_spnCategories"><span class="brown">Salesforce.com</span>, <span class="yellow">Heroku</span>, <span class="red">Ruby</span>, <span class="green">Cloud Foundry</span></span>
-                                                </strong><br />
-                                                
+                                                <span id="ctl00_Body_Listviewpastchallenges_ctrl0_uc_challenge_categories1_spnCategories">
+													<% count = 0 %>	
+													<% for cat in c["categories"] %>
+														<% count = count + 1 %>	
+														<span class="<%= cat["color"] %>"><%= cat["name"] %></span><% if count < c["categories"].count%>,<% end %>
+													<% end %>
+                                                </span>
+                                                </strong><br />                                                
                                             </p>
                                         </div>
                                         <div class="cl">
@@ -77,7 +84,7 @@
                 <!-- Recommendations -->
                 <div class="recommendations">
                     <ul>
-                        <li class="recommend"><a href="give_recommendation.html?username=<%= @parsed_json["profile"]["data"]["username"] %>" id="ctl00_Body_arecommend1" rel="facebox">Recommend <%= @parsed_json["profile"]["data"]["username"] %></a></li>
+                        <li class="recommend"><a href="http://www.cloudspokes.com/give_recommendation.html?username=<%= @parsed_json["profile"]["data"]["username"] %>" id="ctl00_Body_arecommend1" rel="facebox">Recommend <%= @parsed_json["profile"]["data"]["username"] %></a></li>
                         <li class="last"></li>
                     </ul>
                     <h3 id="ctl00_Body_RecommendationCount"><%= @parsed_json["recommendation"]["data"].size %> Recommendations</h3>
@@ -93,7 +100,7 @@
                                             <div style="width: 480px; overflow-x: auto; overflow-y: hidden">
                                                 <p style="padding-bottom: 15px"><%= r["text"]%></p>
                                             </div>
-                                            <span><a href="profile.html?username=<%= r["from"]%>"><%= r["from"]%></a>,&nbsp;<%= Date.parse(r["date"]).strftime("%m/%d/%Y")%></span></div>
+                                            <span><a href="http://www.cloudspokes.com/profile.html?username=<%= r["from"]%>"><%= r["from"]%></a>,&nbsp;<%= Date.parse(r["date"]).strftime("%m/%d/%Y")%></span></div>
                                         <div class="cl">
                                             &nbsp;</div>
                                     </div>
@@ -140,7 +147,7 @@
                             &nbsp;</div>
                     </div>
                     <!-- END Actions -->
-                    <a href="allbadges.html">
+                    <a href="http://www.cloudspokes.com/allbadges.html">
                         <h3>
                             Stats &amp; Achievements</h3>
                     </a>

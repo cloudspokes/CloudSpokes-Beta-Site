@@ -1,7 +1,7 @@
 CloudspokesBeta::Application.routes.draw do
   
-  get 'member/index'
-  match "member/:id", :to => "member#show"
+  get 'members/index'
+  match "members/:id", :to => "member#show"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
